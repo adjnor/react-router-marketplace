@@ -8,6 +8,7 @@ class ItemForm extends Component {
       image: '',
       description: '',
       price: '0',
+      inventory: 0,
     };
   }
 
@@ -30,6 +31,10 @@ class ItemForm extends Component {
     this.setState({ image: evt.target.value });
   };
 
+  handleInventoryChange = (evt) => {
+    this.setState({ inventory: Number(evt.target.value) });
+  };
+
   handleSubmit = (evt) => {
     evt.preventDefault();
 
@@ -38,7 +43,6 @@ class ItemForm extends Component {
       ...this.state,
       id: randomId,
       sellerId: this.props.sellerId,
-      inventory: 0,
       reviews: [],
     });
 
@@ -53,21 +57,37 @@ class ItemForm extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <label>
-          Description:
-          <input
-            onChange={this.handleDescriptionChange}
-            value={this.state.description}
-          />
-        </label>
-        <label>
-          Price:
-          <input onChange={this.handlePriceChange} value={this.state.price} />
-        </label>
-        <label>
-          Image:
-          <input onChange={this.handleImageChange} value={this.state.image} />
-        </label>
+        <div>
+          <label>
+            Description:
+            <input
+              onChange={this.handleDescriptionChange}
+              value={this.state.description}
+            />
+          </label>
+        </div>
+        <div>
+          <label>
+            Price:
+            <input onChange={this.handlePriceChange} value={this.state.price} />
+          </label>
+        </div>
+        <div>
+          <label>
+            Image:
+            <input onChange={this.handleImageChange} value={this.state.image} />
+          </label>
+        </div>
+        <div>
+          <label>
+            Inventory:
+            <input
+              type="number"
+              onChange={this.handleInventoryChange}
+              value={this.state.inventory}
+            />
+          </label>
+        </div>
         <input type="submit" />
       </form>
     );

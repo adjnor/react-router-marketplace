@@ -65,28 +65,25 @@ class App extends Component {
   handleAddItem = (item) => {
     this.setState({ items: this.state.items.concat(item) });
   };
+  renderHome = () => {
+    return renderHome(this.state.items);
+  };
+  renderSeller = (routerData) => {
+    return renderSeller(routerData, this.state.items, this.handleAddItem);
+  };
+  renderItemDetails = (routerData) => {
+    return renderItemDetails(routerData, this.state.items);
+  };
   render() {
     return (
       <BrowserRouter>
         <div>
-          <Route
-            exact={true}
-            path="/"
-            render={() => renderHome(this.state.items)}
-          />
-          <Route
-            exact={true}
-            path="/seller/:sid"
-            render={(routerData) =>
-              renderSeller(routerData, this.state.items, this.handleAddItem)
-            }
-          />
+          <Route exact={true} path="/" render={this.renderHome} />
+          <Route exact={true} path="/seller/:sid" render={this.renderSeller} />
           <Route
             exact={true}
             path="/details/:itemId"
-            render={(routerData) =>
-              renderItemDetails(routerData, this.state.items)
-            }
+            render={this.renderItemDetails}
           />
         </div>
         <Route
